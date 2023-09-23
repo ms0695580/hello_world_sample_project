@@ -1,0 +1,56 @@
+pipeline {
+    agent { label "project_agent1" }
+
+    stages {
+        stage('step1-clone') {
+            steps {
+                echo 'clone'
+                git branch: 'main', url: 'https://github.com/ms0695580/hello_world_sample_project.git'
+            }
+        }
+         stage('step2-build') {
+            steps {
+                echo 'build'
+                sh 'yum install maven -y'
+                sh 'mvn clean package'
+            }
+        }
+         stage('step3-docker build') {
+            steps {
+                echo 'docker build'
+                sh 'docker build -t narayanaimage .'
+            }
+        }
+         stage('step4-docker login') {
+            steps {
+                echo 'docker login'
+                sh 'docker login -u mshobha717 -p shobha@123'
+            }
+        }
+         stage('step5-docker tag') {
+            steps {
+                echo 'docker tag'
+                sh 'docker tag narayanaimage mshobha717/narayanaimage'
+            }
+        }
+         stage('step6-docker push') {
+            steps {
+                echo 'docker push'
+                sh 'docker push mshobha717/narayanaimage'
+            }
+        }
+        stage('step7-docker remove container') {
+            steps {
+                echo 'docker remove container'
+                sh 'docker stop mydocker image || true'
+                sh 'docker rm mydocker image || true'
+            }
+        }
+        stage('step8-docker run') {
+            steps {
+                echo 'docker run'
+                sh 'docker run -d -p 8181:8080 mshobha717/narayanaimage'
+            }
+        }
+    }
+}
