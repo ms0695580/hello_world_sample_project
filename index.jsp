@@ -3,10 +3,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to Devops traning K</title>
+<title>Well come to tomcat K</title>
 <style>
   body {
-    background-color: blue;
+    background-color: red;
   }
 </style>
 </head>
