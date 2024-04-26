@@ -6,7 +6,7 @@
 <title>Well come to ABC bank K</title>
 <style>
   body {
-    background-color: red;
+    background-color: yellow;
   }
 </style>
 </head>
